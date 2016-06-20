@@ -85,6 +85,15 @@ By default, Gainput is built using [CMake](http://www.cmake.org/).
 1. Run `make`
 1. The library can be found in `lib/`, the executables in `samples/`.
 
+Windows under MSYS2 + MINGW64 GCC:
+
+1. Make sure that you have cmake installed. (pacman -S cmake)
+1. Run `mkdir build`
+1. Run `cmake -DWIN32=TRUE -DCMAKE_C_COMPILER=/mingw64/bin/gcc.exe -DCMAKE_CXX_COMPILER=/mingw64/bin/g++.exe ..`
+1. Run `make`
+1. The library can be found in `lib/`, the executables in `samples/`.
+
+
 Android:
 
 1. Make sure that the environment variable `ANDROID_NDK` is set to point to your copy of the Android NDK.

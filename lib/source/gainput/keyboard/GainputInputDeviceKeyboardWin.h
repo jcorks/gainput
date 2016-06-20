@@ -23,6 +23,11 @@ public:
 		nextState_(manager.GetAllocator(), KeyCount_),
 		delta_(0)
 	{
+		// TODO: Add keyboard device function to switch / detect regional keyboard layout 
+		//       (being biased towards US keyboard layout, since the winapi spec has US suggestions only .)
+		// TODO: Should region control be implicit or explicit?
+        // TODO: Should DEVICE_RAW carry over these changes?
+   
 		dialect_[VK_ESCAPE] = KeyEscape;
 		dialect_[VK_F1] = KeyF1;
 		dialect_[VK_F2] = KeyF2;
@@ -36,14 +41,17 @@ public:
 		dialect_[VK_F10] = KeyF10;
 		dialect_[VK_F11] = KeyF11;
 		dialect_[VK_F12] = KeyF12;
-		dialect_[VK_PRINT] = KeyPrint;
+		//dialect_[VK_PRINT] = KeyPrint;
 		dialect_[VK_SCROLL] = KeyScrollLock;
 		dialect_[VK_PAUSE] = KeyBreak;
 
 		dialect_[VK_SPACE] = KeySpace;
 
-		dialect_[VK_OEM_5] = KeyApostrophe;
+		dialect_[VK_OEM_7] = KeyApostrophe;
 		dialect_[VK_OEM_COMMA] = KeyComma;
+        dialect_[VK_OEM_MINUS] = KeyMinus;
+		dialect_[VK_OEM_PERIOD] = KeyPeriod;
+		dialect_[VK_OEM_2] = KeySlash;
 
 		dialect_['0'] = Key0;
 		dialect_['1'] = Key1;
@@ -55,7 +63,14 @@ public:
 		dialect_['7'] = Key7;
 		dialect_['8'] = Key8;
 		dialect_['9'] = Key9;
-
+		
+		dialect_[VK_OEM_1] = KeySemicolon;
+ 
+        // VK_PLUS is only KeyEqual if the keyboard layout does 
+        // not use the shift mod to represent =. This is the case 
+        // for the US layout.
+		dialect_[VK_OEM_PLUS] = KeyEqual; 
+		
 		dialect_['A'] = KeyA;
 		dialect_['B'] = KeyB;
 		dialect_['C'] = KeyC;
@@ -82,6 +97,12 @@ public:
 		dialect_['X'] = KeyX;
 		dialect_['Y'] = KeyY;
 		dialect_['Z'] = KeyZ;
+		
+		dialect_[VK_OEM_4] = KeyBracketLeft;
+		dialect_[VK_OEM_5] = KeyBackslash;
+		dialect_[VK_OEM_6] = KeyBracketRight;
+		
+		dialect_[VK_OEM_3] = KeyGrave;
 
 		dialect_[VK_LEFT] = KeyLeft;
 		dialect_[VK_RIGHT] = KeyRight;
@@ -112,17 +133,13 @@ public:
 		dialect_[VK_VOLUME_DOWN] = KeyVolumeDown;
 		dialect_[VK_VOLUME_UP] = KeyVolumeUp;
 		dialect_[VK_SNAPSHOT] = KeyPrint;
-		dialect_[VK_OEM_4] = KeyExtra1;
-		dialect_[VK_OEM_6] = KeyExtra2;
+
 		dialect_[VK_BROWSER_BACK] = KeyBack;
 		dialect_[VK_BROWSER_FORWARD] = KeyForward;
-		dialect_[VK_OEM_MINUS] = KeyMinus;
-		dialect_[VK_OEM_PERIOD] = KeyPeriod;
-		dialect_[VK_OEM_2] = KeyExtra3;
-		dialect_[VK_OEM_PLUS] = KeyPlus;
-		dialect_[VK_OEM_7] = KeyExtra4;
-		dialect_[VK_OEM_3] = KeyExtra5;
-		dialect_[VK_OEM_1] = KeyExtra6;
+
+
+
+
 
 		dialect_[0xff] = KeyFn; // Marked as "reserved".
 	}
